@@ -1,0 +1,19 @@
+- name: create user
+  hosts: vps
+  become: true
+  
+  tasks:
+  - name: add user
+    user:
+      name: "{{ item.user }}"
+      shell: /bin/zsh
+      append: true
+      create_home: true
+      groups: "{{ item.groups }}"
+      home: "/home/{{ item.user }}"
+      password: '*'
+      # generate_ssh_key: yes
+      # ssh_key_bits: 2048
+      # ssh_key_file: .ssh/id_rsa
+    with_items:
+      - {user: rr, groups: "ru,admin,sudo" }

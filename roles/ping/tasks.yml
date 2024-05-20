@@ -1,0 +1,8 @@
+- name: Ping servers
+  hosts: remote
+  become: true
+  become_user: "{{ansible_user}}"
+
+  tasks: 
+  - name: Ping
+    ansible.builtin.ping:

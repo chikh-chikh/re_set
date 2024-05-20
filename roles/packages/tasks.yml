@@ -1,0 +1,47 @@
+- hosts: all
+  # tags: always
+  become: true
+  pre_tasks:
+    - name: pre-run | update package cache (debian, etc)
+      tags: always
+      ansible.builtin.apt: 
+        update_cache: yes
+        cache_valid_time: 3600
+
+  vars:
+    packages:
+      - ack-grep
+      - bash
+      - curl
+      - fish
+      - git
+      - htop
+      - nmap
+      - mosh
+      - most
+      - vim
+      - tmux
+      - wget
+      - zsh
+
+  tasks:
+    - name: install packages
+      ansible.builtin.apt:
+        pkg: "{{ packages }}"
+        state: present
+
+    - name: Remove useless packages from the cache
+      ansible.builtin.apt:
+        autoclean: yes
+
+    - name: Remove dependencies that are no longer required and purge their configuration files
+      ansible.builtin.apt:
+        autoremove: yes
+        purge: true
+
+    - name: Run "apt clean"
+      apt:
+        clean: yes
+
+
+

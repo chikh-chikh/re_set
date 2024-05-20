@@ -1,0 +1,7 @@
+
+- name: Install the build dependencies for awesome and lgi
+  ansible.builtin.apt:
+    pkg:
+      - awesome
+      - lgi
+    state: build-dep
