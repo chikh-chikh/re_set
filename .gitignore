@@ -1,1 +1,36 @@
-ansible_use
+ansible_src.link
+
+# Don't include Ansible Collections in git, but include requirements file
+/collections/*
+!/collections/requirements.yml
+
+#-- Local environment configuration
+.env
+
+#-- python
+*.py[co]
+
+#-- vim
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
+#-- Emacs
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+#-- SublimeText
+*.sublime-workspace
+#*.sublime-project
+
+#-- sftp configuration file
+sftp-config.json
+

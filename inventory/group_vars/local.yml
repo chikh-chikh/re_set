@@ -1,9 +1,10 @@
 full_name: Rustam Uzairov
-git_user: chikh-chikh
-git_email: mr.uzairov@gmail.com
+git_user: svrvt
+git_email: svrvt.zrv@gmail.com
 
 user_name: "{{ ansible_env.USER }}"
 home: "{{ ansible_env.HOME }}"
+# hostname: "{{ ansible_hostname }}"
 
 xdg_config_home: "{{ ansible_env.XDG_CONFIG_HOME | default(ansible_env.HOME + '/.config') }}"
 xdg_data_home: "{{ ansible_env.XDG_DATA_HOME | default(ansible_env.HOME + '/.local/share') }}"
