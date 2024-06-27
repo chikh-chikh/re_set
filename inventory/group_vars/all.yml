@@ -1,6 +1,7 @@
 default_roles:
   # - packages
-  - ping
+  # - ping
+  - manage-user
 
 # hostname: "{{ ansible_hostname }}"
 

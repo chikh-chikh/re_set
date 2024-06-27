@@ -1,5 +1,5 @@
 - name: create user
-  hosts: vps
+  hosts: all
   become: true
   
   tasks:
@@ -16,4 +16,4 @@
       # ssh_key_bits: 2048
       # ssh_key_file: .ssh/id_rsa
     with_items:
-      - {user: rr, groups: "ru,admin,sudo" }
+      - {user: ru, groups: "ru,admin,sudo" }
