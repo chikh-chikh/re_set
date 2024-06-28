@@ -34,3 +34,4 @@ tramp
 #-- sftp configuration file
 sftp-config.json
 
+/playbooks/roles/ansible-*
