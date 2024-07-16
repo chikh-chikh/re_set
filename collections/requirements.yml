@@ -41,3 +41,13 @@ collections:
   # instead of the one included in the DebOps Python package.
   - name: 'debops.debops'
     version: '*'
+
+  - name: https://gitlab.com/nodiscc/xsrv.git
+    type: git
+    version: release
+
+  - name: git+https://gitlab.com/nodiscc/toolbox.git#/ARCHIVE/ANSIBLE-COLLECTION/
+    type: git
+    version: master
+
+

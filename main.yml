@@ -2,9 +2,9 @@
 - hosts: all
   # connection: local
   tasks:
-    - name: set roles
+    - name: Set roles
       set_fact:
-        roles: "{{ ansible_run_tags != ['all'] and ansible_run_tags or default_roles | difference(exclude_roles | default([])) }}"
+        roles: "{{ansible_run_tags != ['all'] and ansible_run_tags or default_roles | difference(exclude_roles | default([]))}}"
       tags:
         - always
 

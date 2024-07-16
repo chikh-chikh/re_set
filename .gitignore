@@ -3,6 +3,7 @@ ansible_src.link
 # Don't include Ansible Collections in git, but include requirements file
 /collections/*
 !/collections/requirements.yml
+!/collections/get-collections.sh
 
 #-- Local environment configuration
 .env
