@@ -49,5 +49,3 @@ collections:
   - name: git+https://gitlab.com/nodiscc/toolbox.git#/ARCHIVE/ANSIBLE-COLLECTION/
     type: git
     version: master
-
-
