@@ -36,3 +36,4 @@ tramp
 sftp-config.json
 
 /playbooks/roles/ansible-*
+/playbooks/roles/vbotka.*

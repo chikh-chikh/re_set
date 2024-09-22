@@ -1,7 +1,8 @@
-- name: create user
-  hosts: all
+- hosts: remotes
   become: true
-  
+  vars:
+  roles:
+     # - role:
   tasks:
   - name: add user
     user:
@@ -11,9 +12,9 @@
       create_home: true
       groups: "{{ item.groups }}"
       home: "/home/{{ item.user }}"
-      password: '*'
+      # password: '*'
       # generate_ssh_key: yes
       # ssh_key_bits: 2048
       # ssh_key_file: .ssh/id_rsa
     with_items:
-      - {user: ru, groups: "ru,admin,sudo" }
+      - { user: "{{ lookup('env', 'USER') }}", groups: "{{ lookup('env', 'USER') }},admin,sudo" }

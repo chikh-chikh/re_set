@@ -1,3 +1,6 @@
 ---
-- src: https://github.com/mrlesmithjr/ansible-network-tools
+- src: https://github.com/svrvt/ansible-network-tools
 
+- name: vbotka.linux_postinstall
+- name: vbotka.ansible_lib
+- name: vbotka.linux_lib
