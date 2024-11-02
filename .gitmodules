@@ -1,0 +1,4 @@
+[submodule "hummingbot"]
+	path = docker/hummingbot
+	url = https://github.com/svrvt/hummingbot-deploy.git
+	branch = in-ansible
