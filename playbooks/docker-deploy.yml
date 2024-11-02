@@ -1,0 +1,80 @@
+# - name: Docker proxy nextwork
+#   # gather_facts: false
+#   # remote_user: '{{ remote_user }}'
+#   become: false
+#   # ignore_errors: true
+#   run_once: true
+#   ansible.builtin.shell:
+#     cmd: docker network create --driver=bridge --subnet 172.24.0.0/16 proxy
+
+# - name: Create directory
+#   # when: item. is true
+#   file:
+#     path: '{{ item.run_directory }}/{{ item.container }}'
+#     state: directory
+#     mode: 0740
+
+- name: Pull latest {{ item.image }}
+  ansible.builtin.shell:
+    cmd: docker pull {{ item.image }}
+  when: docker.pull is true
+
+- name: Copy docker files
+  ansible.builtin.template:
+    src: '{{ item.run_directory }}/{{ item.container }}/compose.j2'
+    dest: '{{ item.run_directory }}/{{ item.container }}/docker-compose.yml'
+    force: true
+
+- name: Setup {{ item.container }} configuration
+  ansible.builtin.include_tasks: '{{ item.container }}/main.yml'
+  when: item.config is true
+
+- name: Stop {{ item.container }} container
+  ignore_errors: true
+  ansible.builtin.shell:
+    cmd: docker stop {{ item.container }}
+  when: docker.stop is true or item.run is not true
+
+- name: Start {{ item.container }} container
+  ignore_errors: true
+  ansible.builtin.shell:
+    cmd: docker compose -f {{ item.run_directory }}/{{ item.container }}/docker-compose.yml up -d
+  when: docker.deploy is true and item.run is true
+  
+  # - name: Create traefik proxy directory
+  #   when: item.traefik is true
+  #   file:
+  #     path: '{{ config_directory }}/traefik/'
+  #     state: directory
+  #     mode: 0740
+  # 
+  # - name: Create traefik proxy directory
+  #   when: item.traefik is true
+  #   file:
+  #     path: '{{ config_directory }}/traefik/config/'
+  #     state: directory
+  #     mode: 0740
+  #
+  # - name: Create traefik proxy directory
+  #   when: item.traefik is true
+  #   file:
+  #     path: '{{ config_directory }}/traefik/config/proxy'
+  #     state: directory
+  #     mode: 0740
+  #
+  # - name: Copy {{ item.container }} traefik configuration
+  #   when: item.traefik is true
+  #   include_tasks:
+  #     file: traefik/deploy/main.yml
+  #
+  # - name: Delete {{ item.container }} container
+  #   ignore_errors: true
+  #   when: docker.delete is true
+  #   command:
+  #     cmd: docker rm {{ item.container }}
+  # 
+  # - name: Delete {{ item.container }} docker compose file
+  #   when: item.delete is true
+  #   file:
+  #     path: '{{ item.run_directory }}/docker-compose.yml'
+  #     state: absent

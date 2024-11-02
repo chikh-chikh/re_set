@@ -1,0 +1,12 @@
+- name: Docker Deployment
+  hosts: vaio
+  gather_facts: true
+  # remote_user: '{{ remote_user }}'
+  become: false
+
+  tasks:
+    - name: "Docker deployment"
+      ansible.builtin.include_tasks: docker-deploy.yml
+      when: docker.deploy is true
+      with_items:
+        - "{{ services }}"

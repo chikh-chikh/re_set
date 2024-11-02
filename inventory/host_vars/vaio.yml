@@ -1,0 +1,35 @@
+# remote_user: root
+# config_directory: /mnt/
+# owner: "{{ lookup('env', 'USER') }}"
+# group: "{{ lookup('env', 'USER') }}"
+docker:
+  deploy: true
+  pull: false
+  stop: true
+  delete: false
+  # run_directory: '{{ (ansible_config_file | dirname + "/docker") | realpath }}'
+services:
+  - image: hummingbot/hummingbot:latest
+    container: hummingbot
+    run: false
+    run_directory: '{{ (ansible_config_file | dirname + "/docker") | realpath }}'
+    image_dashboard: hummingbot/dashboard:latest
+    # dashboard_password: a
+    config_password: a
+    image_api: hummingbot/backend-api:latest
+    image_emqx: emqx:5
+
+  - image: frooodle/s-pdf:latest-ultra-lite
+    container: stirling-pdf
+    run: false
+    run_directory: '{{ (ansible_config_file | dirname + "/docker") | realpath }}'
+ 
+  # - image: ghcr.io/wg-easy/wg-easy:13
+  #   container: wireguard
+  #   port: 16382
+  #   traefik: false
+
+  # - image: docker.io/pihole/pihole:2024.06.0
+  #   container: pihole
+  #   config: false
+  #   traefik: false
